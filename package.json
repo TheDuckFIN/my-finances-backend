@@ -1,0 +1,7 @@
+{
+  "name": "my-finances-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Valtteri Lakaniemi <valtteri.lakaniemi@reaktor.com>",
+  "license": "MIT"
+}
