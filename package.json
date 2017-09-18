@@ -1,7 +1,29 @@
 {
   "name": "my-finances-backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "repository": "https://github.com/TheDuckFIN/my-finances-backend",
   "author": "Valtteri Lakaniemi <valtteri.lakaniemi@reaktor.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn run build && yarn run watch",
+    "build": "yarn run build-ts && yarn run tslint",
+    "serve": "nodemon dist/server.js",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"yarn run watch-ts\" \"yarn run serve\"",
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w",
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "debug": "yarn run build && yarn run watch-debug",
+    "serve-debug": "nodemon --inspect dist/server.js",
+    "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"yarn run watch-ts\" \"yarn run serve-debug\""
+  },
+  "dependencies": {
+    "express": "^4.15.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.0.37",
+    "concurrently": "^3.5.0",
+    "nodemon": "^1.12.1",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.2"
+  }
 }
