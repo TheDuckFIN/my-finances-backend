@@ -1,0 +1,9 @@
+{
+  "dev": {
+    "host": "localhost",
+    "database": "myfinances_dev",
+    "driver": "postgresql",
+    "multipleStatements": true
+  },
+  "sql-file": true  
+}
