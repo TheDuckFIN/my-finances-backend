@@ -1,4 +1,5 @@
 export const env = process.env.APP_ENV || 'dev';
+export const jwtSecret = process.env.APP_SECRET || 'dev_secret (not really)';
 
 const db = require('../database.json')[env];
 
