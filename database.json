@@ -7,6 +7,7 @@
   },
   "test": {
     "host": "localhost",
+    "user": "postgres",
     "database": "myfinances_test",
     "driver": "postgresql",
     "multipleStatements": true
