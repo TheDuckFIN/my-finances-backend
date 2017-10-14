@@ -4,8 +4,12 @@
   "repository": "https://github.com/TheDuckFIN/my-finances-backend",
   "author": "Valtteri Lakaniemi <valtteri.lakaniemi@reaktor.com>",
   "license": "MIT",
+  "engines": {
+    "node": "8.7.0"
+  },
   "scripts": {
-    "start": "yarn run build && yarn run watch",
+    "start": "yarn run build && node node_modules/db-migrate/bin/db-migrate up -e production && NODE_ENV=production node dist/server.js",
+    "start:dev": "yarn run build && yarn run watch",
     "build": "yarn run build-ts && yarn run tslint",
     "serve": "nodemon dist/server.js",
     "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"yarn run watch-ts\" \"yarn run serve\"",

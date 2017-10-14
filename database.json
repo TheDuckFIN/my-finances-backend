@@ -12,5 +12,7 @@
     "driver": "postgresql",
     "multipleStatements": true
   },
+  "production": {
+  },
   "sql-file": true  
 }

@@ -4,6 +4,7 @@ import * as morgan from 'morgan';
 
 import apiIndex from './routes/index';
 import { failure } from './utils/json-gen';
+import * as config from './config';
 
 const app = express();
 app.use(bodyParser.json());
@@ -22,4 +23,4 @@ app.all('*', (req, res) => {
     }));
 });
 
-app.listen(3000);
+app.listen(config.port, () => console.log('Listening on port ' + config.port));
