@@ -5,5 +5,11 @@
     "driver": "postgresql",
     "multipleStatements": true
   },
+  "test": {
+    "host": "localhost",
+    "database": "myfinances_test",
+    "driver": "postgresql",
+    "multipleStatements": true
+  },
   "sql-file": true  
 }
