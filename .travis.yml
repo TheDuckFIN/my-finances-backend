@@ -5,8 +5,10 @@ cache: yarn
 services:
 - postgresql
 - docker
-install:
+before_install:
 - docker build -t my-finances-backend .
+install:
+- yarn install
 before_script:
 - psql -c 'create database myfinances_test;' -U postgres
 - node node_modules/db-migrate/bin/db-migrate up -e test
