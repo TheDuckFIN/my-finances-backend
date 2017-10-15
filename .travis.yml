@@ -6,12 +6,12 @@ services:
 - postgresql
 - docker
 install:
-- docker build -t TheDuckFIN/my-finances-backend
+- docker build -t my-finances-backend
 before_script:
 - psql -c 'create database myfinances_test;' -U postgres
 - node node_modules/db-migrate/bin/db-migrate up -e test
 script: true
 after_success:
 - docker login -u="_" --password="$HEROKU_TOKEN" registry.heroku.com
-- docker tag TheDuckFIN/my-finances-backend registry.heroku.com/myfinances-api/web
+- docker tag my-finances-backend registry.heroku.com/myfinances-api/web
 - docker push registry.heroku.com/myfinances-api/web
