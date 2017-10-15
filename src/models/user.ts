@@ -1,13 +1,24 @@
 import db from '../db';
+import * as bcrypt from 'bcrypt';
 import * as Promise from 'bluebird';
+import * as R from 'ramda';
 import { pgp } from '../db';
+import { User } from 'types';
 
 export function getAll() {
   return db.any('SELECT * FROM users');
 }
 
-export function create(details: object) {
-  return db.none(pgp.helpers.insert(details, null, 'users'));
+export function create(params: User) {
+  return new Promise((resolve, reject) =>
+    findByName(params.username)
+      .then(
+        resolve => reject('Username already in use'),
+        reject => resolve(bcrypt.hash(R.prop('password', params), 10).then(hash =>
+          db.none(pgp.helpers.insert(R.assoc('password', hash, params), null, 'users'))
+        ))
+      )
+  );
 }
 
 export function findByName(username: string) {

@@ -1,4 +1,4 @@
-import * as Users from '../queries/user';
+import * as Users from '../models/user';
 import * as Promise from 'bluebird';
 import * as bcrypt from 'bcrypt';
 import * as config from '../config';
