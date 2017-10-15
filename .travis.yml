@@ -6,7 +6,7 @@ services:
 - postgresql
 - docker
 install:
-- docker build -t my-finances-backend
+- docker build -t my-finances-backend .
 before_script:
 - psql -c 'create database myfinances_test;' -U postgres
 - node node_modules/db-migrate/bin/db-migrate up -e test
