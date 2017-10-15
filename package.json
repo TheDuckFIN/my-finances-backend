@@ -8,7 +8,7 @@
     "node": "8.7.0"
   },
   "scripts": {
-    "start": "yarn run build && node node_modules/db-migrate/bin/db-migrate up -e production && NODE_ENV=production node dist/server.js",
+    "start": "node node_modules/db-migrate/bin/db-migrate up -e production && NODE_ENV=production node dist/server.js",
     "start:dev": "yarn run build && yarn run watch",
     "build": "yarn run build-ts && yarn run tslint",
     "serve": "nodemon dist/server.js",

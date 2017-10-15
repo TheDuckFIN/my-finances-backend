@@ -4,17 +4,14 @@ node_js:
 cache: yarn
 services:
 - postgresql
+- docker
 install:
-- yarn install
+- docker build -t TheDuckFIN/my-finances-backend
 before_script:
 - psql -c 'create database myfinances_test;' -U postgres
 - node node_modules/db-migrate/bin/db-migrate up -e test
-script:
-- yarn run build
-deploy:
-  provider: heroku
-  api_key:
-    secure: YyVLesbZPBni1wEbP8cex6w3o5aBar2GEvytkA9oHMKweILt8Blx3PASQcuvvxEcZvgMfy2ziNfQzYWDcV9NYSBqOW3xGv1MbXJWNMrfVa4MWXICNigZ17PuJPmP1MoatASObOv3C0ZZLohl6Y3Obj/Sm2949CfhmZC/7dGmGPvLPcB7GpLSyfK372FWMKKYXRioeR04r0QfP4MyQV3LFBkBCoHJtLnW4ffqSMUGqTpv8xD+DZIUu2i7q+5p/ST1S5j8+rYFM2mdAoSNARn1erjoOBGJL7fVHc1COgrWHeDkwFk2+KPbmsHDK0ITM0tRc/1K8sdTHUARhFndeUE7aNwS4WSq2wSugM7j49AVLugS95Vk3MzF8SL/skHd6Lt0tLRrJWInO81kQ8jVY/ZjaKJoOixneUNWq6zYppK45sW97FYR/VW6rBx/oQRD+oiJUVstLuZByHuIjEoPurMP6mS98HlvfFE9PLFSgLNXzH23VzGpCXF8Jmc6bKJaitUsfFx9WVtcykqUaj93JR5obU8zGDQ4AijGFJ6InLzOiU3D/qY4ARXP/hicy8LQxGxa+ccyhO55mteDIbajomog/Y2aQLdUGl2TMqOVaVY1Al2C+vRUjTjx1bZK4d6ciBc/mYTpCgPhfwbbZqTdfxH2cqgo52HtbuHAnAan9BR/Xok=
-  app: myfinances-api
-  on:
-    repo: TheDuckFIN/my-finances-backend
+script: true
+after_success:
+- docker login -u="_" --password="$HEROKU_TOKEN" registry.heroku.com
+- docker tag TheDuckFIN/my-finances-backend registry.heroku.com/myfinances-api/web
+- docker push registry.heroku.com/myfinances-api/web
